@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+
+          .page-container{
+                display: flex;
+                flex-direction: row-reverse;
+            }
+            .col-md-10 {
+                width: 80%;
+            }
+            .col-md-2 {
+                width: 20%;
+            }
+            .button-grp{
+                display: inline-block;
+            }
+
+            .button-grp div {
+                padding: 15px;
+            }
+
+            .button-grp div button{
+                width: 100px;
+                background-color: #72c3dc;
+                border: 0;
+                padding: 10px;
+                border-radius: 4px;
+                box-shadow: 0px 4px 3px #497886;
+            }
+            .sm-grid{
+                text-align: center;
+                color: #ffffff;
+                font-size: 20px;
+                font-weight: bold;
+                padding: 42%;
+            }
+            #grid-number{
+                display: grid;
+                grid-template-columns: auto auto auto;
+                width: 500px;
+                height: 500px;
+            }
+
+            @media screen and (max-device-width: 480px)
+and (orientation: portrait) {
+                        .button-grp{
+                            display: flex;
+                            justify-content: center;
+                        }
+                        .page-container{
+                            display: inline-block;
+                        }
+                        .col-md-10 {
+                            width: 100%;
+                        }
+                        .col-md-2 {
+                            width: 100%;
+                        }
+                        #grid-number{
+                        display: inline-block;
+                        grid-template-columns: none;
+                        width: 100%;
+                        height: auto;
+                    }
+                    .sm-grid{
+                        text-align: center;
+                        color: #ffffff;
+                        font-size: 20px;
+                        font-weight: bold;
+                        padding: 10px;
+                    }
+            }
+        </style>
+    </head>
+<body>
+    <div class="page-container">
+        <div class="col-md-2">
+            <div class="button-grp">
+                <div><button onclick="shuffle()">SUFFLE</button></div>
+                <div><button onclick="sort()">SORT</button></div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div id="grid-number">
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var numberGrid = [
+        {
+            number: 1,
+            color: "#333333"
+        },
+        {
+            number: 2,
+            color: "#EFEFEF"
+        },
+        {
+            number: 3,
+            color: "#72C3DC"
+        },
+        {
+            number: 4,
+            color: "#2B8EAD"
+        },
+        {
+            number: 5,
+            color: "#6F98A8"
+        },
+        {
+            number: 6,
+            color: "#BFBFBF"
+        },
+        {
+            number: 7,
+            color: "#333333"
+        },
+        {
+            number: 8,
+            color: "#2F454E"
+        },
+        {
+            number: 9,
+            color: "#333333"
+        }
+    ]
+
+
+
+
+    function shuffle() {
+        var data = numberGrid;
+    for (var i = 0; i < data.length - 1; i++) {
+        var j = i + Math.floor(Math.random() * (data.length - i));
+
+        let temp = data[j];
+        data[j] = data[i];
+        data[i] = temp;
+    }
+    displaySort(data);
+}
+
+function sort(){
+        var sorting = numberGrid;
+        sorting.sort(function(a, b){
+            return a.number - b.number;
+        });
+        displaySort(sorting);
+}
+
+function displaySort(d){
+    document.getElementById("grid-number").innerHTML = "";
+    d.forEach((n)=>{
+    document.getElementById("grid-number").innerHTML += 
+              "<div class='sm-grid' style='background: "+n.color+"'>"+n.number+"</div>";
+})
+}
+
+sort();
+
+
+</script>
+</html>
+
